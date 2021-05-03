@@ -33,14 +33,29 @@ class MinHeap():
      return self.size== self.capacity
 
     # re heapfy the heap 
-     def swap(self,index1,index2):
-        self.storage[index1],self.storage[index2]=self.storage[index2],self.storage[index1]
+    def swap(self,index1,index2):
+        temp = self.storage[index1]
+        self.storage[index1]=self.storage[index2]
+        self.storage[index2]= temp
+    
     def heapifyUp(self):
         index = self.size -1
         while(self.hasParent(index)and self.parent(index)>self.storage[index]):
             self.swap(self.getParentIndex(index),index)
             index = self.getParentIndex(index)
 
+    def heapfyDown(self):
+        index = 0
+        while(self.getLeftChildIndex(index)):
+            smallerChildIndex = self.getLeftChildIndex(index)
+            if(self.hasRightChild(index) and self.rightChild(index)<self.leftChild(index)):
+                smallerChildIndex = self.getRightChildIndex(index)
+            if(self.storage[index] < self.storage[smallerChildIndex]):
+                break
+            else:
+                self.swap(index,smallerChildIndex)
+
+            
 
     #insert to the heap 
     def insert(self,data):
@@ -49,6 +64,27 @@ class MinHeap():
         self.storage[self.size]=data
         self.size +=1
         self.heapifyUp()
+       
 
+    # pop min 
+    def removeMin(self):
+        if(self.size == 0):
+            raise("Empty Heap")
+        data = self.storage[0] = self.storage[self.saize-1]
+        self.size -= 1
+        self.heapfyDown()
+        return data
 
 # note we reach the parent and the left child and teh right child using one index
+
+heap = MinHeap(10)
+heap.insert(1)
+heap.insert(4)
+heap.insert(3)
+heap.insert(5)
+heap.insert(2)
+heap.insert(10)
+heap.insert(11)
+heap.insert(12)
+heap.insert(6)
+print(heap.storage)
