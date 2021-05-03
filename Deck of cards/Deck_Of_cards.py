@@ -46,10 +46,10 @@ class Player():
     def discard(self):
         return self.hand.pop()
 
-deck = DecK()
-guy = Player("guy")
-deck.shuffle()
-deck.build()
-guy.draw(deck)
-guy.show()
+# deck = DecK()
+# guy = Player("guy")
+# deck.shuffle()
+# deck.build()
+# guy.draw(deck)
+# guy.show()
 
