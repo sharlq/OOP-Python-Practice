@@ -26,11 +26,30 @@ class DecK():
             r = random.randint(0,i)
             self.cards[i],self.cards[r]=self.cards[r],self.cards[i]
 
+    def draw(self):
+       return self.cards.pop()
+
+
+
+class Player():
+    def __init__(self,name):
+        self.name=name
+        self.hand=[]
+
+    def draw(self,deck):
+        self.hand.append(deck.draw())
+
+    def show(self):
+        for i in self.hand:
+            i.show() # i think it returns deck object instead of cards object
+
+    def discard(self):
+        return self.hand.pop()
+
 deck = DecK()
-
-
-deck.build()
-
-
+guy = Player("guy")
 deck.shuffle()
-deck.show()
+deck.build()
+guy.draw(deck)
+guy.show()
+
